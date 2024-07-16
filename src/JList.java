@@ -1,17 +1,15 @@
 import java.awt.Color;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Font;
-import javax.swing.AbstractListModel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
 public class JList {
 
     private JFrame frame;
+    private JTextField textNewItem;
 
     /**
      * Launch the application.
@@ -46,12 +44,17 @@ public class JList {
         frame.getContentPane().setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(53, 24, 144, 214);
+        scrollPane.setBounds(26, 24, 377, 195);
         frame.getContentPane().add(scrollPane);
+
+        DefaultListModel myyListModel = new DefaultListModel();
 
         javax.swing.JList list = new javax.swing.JList();
         list.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
+
+                if(list.getSelectedIndex()>=0){
+
                 String color = list.getSelectedValue().toString();
                 switch(color) {
                     case "Black":
@@ -67,7 +70,7 @@ public class JList {
                         frame.getContentPane().setBackground(Color.YELLOW);
                         break;
                     case "Green":
-                        frame.getContentPane().setBackground(Color.GREEN );
+                        frame.getContentPane().setBackground(Color.GREEN);
                         break;
                     case "Blue":
                         frame.getContentPane().setBackground(Color.BLUE);
@@ -76,24 +79,25 @@ public class JList {
                         frame.getContentPane().setBackground(Color.ORANGE);
                         break;
                     case "Purple":
-                        frame.getContentPane().setBackground(new Color(153,102,204));
+                        frame.getContentPane().setBackground(new Color(153, 102, 204));
                         break;
                     case "Brown":
                         frame.getContentPane().setBackground(new Color(204, 153, 120));
                         break;
                     case "Light Blue":
-                        frame.getContentPane().setBackground(new Color(204,255,255));
+                        frame.getContentPane().setBackground(new Color(204, 255, 255));
                         break;
                     case "Light Green":
-                        frame.getContentPane().setBackground(new Color(153,204,153));
+                        frame.getContentPane().setBackground(new Color(153, 204, 153));
                         break;
                     case "Light Red":
-                        frame.getContentPane().setBackground(new Color(255,102,102));
+                        frame.getContentPane().setBackground(new Color(255, 102, 102));
                         break;
 
                     default:
                         frame.getContentPane().setBackground(Color.GRAY);
                         break;
+                }
                 }
 
             }
@@ -110,6 +114,22 @@ public class JList {
             }
         });
         list.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+        JButton btnDelete = new JButton("Delete");
+        btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        btnDelete.setBounds(26, 230, 89, 23);
+        frame.getContentPane().add(btnDelete);
+
+        textNewItem = new JTextField();
+        textNewItem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        textNewItem.setBounds(125, 230, 176, 23);
+        frame.getContentPane().add(textNewItem);
+        textNewItem.setColumns(10);
+
+        JButton btnAdd = new JButton("Add");
+        btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        btnAdd.setBounds(311, 230, 89, 23);
+        frame.getContentPane().add(btnAdd);
     }
 }
 
