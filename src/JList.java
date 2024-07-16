@@ -3,6 +3,8 @@ import java.awt.EventQueue;
 
 import javax.swing.*;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
@@ -47,75 +49,39 @@ public class JList {
         scrollPane.setBounds(26, 24, 377, 195);
         frame.getContentPane().add(scrollPane);
 
-        DefaultListModel myyListModel = new DefaultListModel();
+        DefaultListModel myListModel = new DefaultListModel();
+        myListModel.addElement("Olive");
+        myListModel.addElement("Rose");
+
 
         javax.swing.JList list = new javax.swing.JList();
+        list.setModel(myListModel);
+
         list.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
+                //String color = list.getSelectedValue().toString();
 
                 if(list.getSelectedIndex()>=0){
 
-                String color = list.getSelectedValue().toString();
-                switch(color) {
-                    case "Black":
-                        frame.getContentPane().setBackground(Color.BLACK);
-                        break;
-                    case "White":
-                        frame.getContentPane().setBackground(Color.WHITE);
-                        break;
-                    case "Red":
-                        frame.getContentPane().setBackground(Color.RED);
-                        break;
-                    case "Yellow":
-                        frame.getContentPane().setBackground(Color.YELLOW);
-                        break;
-                    case "Green":
-                        frame.getContentPane().setBackground(Color.GREEN);
-                        break;
-                    case "Blue":
-                        frame.getContentPane().setBackground(Color.BLUE);
-                        break;
-                    case "Orange":
-                        frame.getContentPane().setBackground(Color.ORANGE);
-                        break;
-                    case "Purple":
-                        frame.getContentPane().setBackground(new Color(153, 102, 204));
-                        break;
-                    case "Brown":
-                        frame.getContentPane().setBackground(new Color(204, 153, 120));
-                        break;
-                    case "Light Blue":
-                        frame.getContentPane().setBackground(new Color(204, 255, 255));
-                        break;
-                    case "Light Green":
-                        frame.getContentPane().setBackground(new Color(153, 204, 153));
-                        break;
-                    case "Light Red":
-                        frame.getContentPane().setBackground(new Color(255, 102, 102));
-                        break;
-
-                    default:
-                        frame.getContentPane().setBackground(Color.GRAY);
-                        break;
-                }
                 }
 
             }
         });
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scrollPane.setViewportView(list);
-        list.setModel(new AbstractListModel() {
-            String[] values = new String[] {"Black", "White", "Gray", "Red", "Yellow", "Green", "Blue", "Orange", "Purple", "Brown", "Light Blue", "Light Green", "Light Red"};
-            public int getSize() {
-                return values.length;
-            }
-            public Object getElementAt(int index) {
-                return values[index];
-            }
-        });
+
         list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         JButton btnDelete = new JButton("Delete");
+        btnDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                int selectedIdex = list.getSelectedIndex();
+                if(selectedIdex>=0) {
+                    myListModel.remove(selectedIdex);
+                }
+            }
+        });
         btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnDelete.setBounds(26, 230, 89, 23);
         frame.getContentPane().add(btnDelete);
@@ -127,9 +93,17 @@ public class JList {
         textNewItem.setColumns(10);
 
         JButton btnAdd = new JButton("Add");
+        btnAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String newItem = textNewItem.getText();
+                if(newItem.length()>0 && !myListModel.contains(newItem)) {
+                    myListModel.addElement(newItem);
+                    textNewItem.setText("");
+                }
+            }
+        });
         btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnAdd.setBounds(311, 230, 89, 23);
         frame.getContentPane().add(btnAdd);
-    }
-}
+    }}
 
