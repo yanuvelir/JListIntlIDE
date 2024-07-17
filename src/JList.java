@@ -40,18 +40,19 @@ public class JList {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 450, 300);
+        frame = new JFrame("*Editable List*");
+        frame.setBounds(100, 100, 520, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(26, 24, 377, 195);
+        scrollPane.setBounds(18, 24, 472, 195);
         frame.getContentPane().add(scrollPane);
 
         DefaultListModel myListModel = new DefaultListModel();
         myListModel.addElement("Olive");
         myListModel.addElement("Rose");
+        myListModel.addElement("Enter any record into the text field and click on the *Add* button");
 
 
         javax.swing.JList list = new javax.swing.JList();
@@ -83,12 +84,12 @@ public class JList {
             }
         });
         btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        btnDelete.setBounds(26, 230, 89, 23);
+        btnDelete.setBounds(18, 230, 89, 23);
         frame.getContentPane().add(btnDelete);
 
         textNewItem = new JTextField();
         textNewItem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        textNewItem.setBounds(125, 230, 176, 23);
+        textNewItem.setBounds(125, 230, 258, 23);
         frame.getContentPane().add(textNewItem);
         textNewItem.setColumns(10);
 
@@ -103,7 +104,7 @@ public class JList {
             }
         });
         btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        btnAdd.setBounds(311, 230, 89, 23);
+        btnAdd.setBounds(400, 230, 89, 23);
         frame.getContentPane().add(btnAdd);
     }}
 
