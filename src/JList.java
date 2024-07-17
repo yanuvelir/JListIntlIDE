@@ -46,6 +46,7 @@ public class JList {
         myListModel.addElement("Olive");
         myListModel.addElement("Rose");
         myListModel.addElement("Enter any record into the text field and click on the *Add* button");
+        myListModel.addElement("Or select any record to delete");
 
 
         javax.swing.JList list = new javax.swing.JList();
