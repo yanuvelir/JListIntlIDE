@@ -1,12 +1,7 @@
-import java.awt.Color;
-import java.awt.EventQueue;
 
+import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
 
 public class JList {
 
@@ -17,14 +12,12 @@ public class JList {
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    JList window = new JList();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                JList window = new JList();
+                window.frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -58,15 +51,13 @@ public class JList {
         javax.swing.JList list = new javax.swing.JList();
         list.setModel(myListModel);
 
-        list.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                //String color = list.getSelectedValue().toString();
+        list.addListSelectionListener(e -> {
+            //String color = list.getSelectedValue().toString();
 
-                if(list.getSelectedIndex()>=0){
-
-                }
+            if(list.getSelectedIndex()>=0){
 
             }
+
         });
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scrollPane.setViewportView(list);
@@ -74,13 +65,11 @@ public class JList {
         list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         JButton btnDelete = new JButton("Delete");
-        btnDelete.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        btnDelete.addActionListener(e -> {
 
-                int selectedIdex = list.getSelectedIndex();
-                if(selectedIdex>=0) {
-                    myListModel.remove(selectedIdex);
-                }
+            int selectedIdex = list.getSelectedIndex();
+            if(selectedIdex>=0) {
+                myListModel.remove(selectedIdex);
             }
         });
         btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -94,13 +83,11 @@ public class JList {
         textNewItem.setColumns(10);
 
         JButton btnAdd = new JButton("Add");
-        btnAdd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String newItem = textNewItem.getText();
-                if(newItem.length()>0 && !myListModel.contains(newItem)) {
-                    myListModel.addElement(newItem);
-                    textNewItem.setText("");
-                }
+        btnAdd.addActionListener(e -> {
+            String newItem = textNewItem.getText();
+            if(newItem.length()>0 && !myListModel.contains(newItem)) {
+                myListModel.addElement(newItem);
+                textNewItem.setText("");
             }
         });
         btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
